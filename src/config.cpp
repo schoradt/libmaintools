@@ -32,18 +32,52 @@
  * @author Sven Schoradt
  */
 
-
+/**
+ * Erstellt ein leeres Konfigobjekt, in das mittels open_file dann daten geladen 
+ * werden können.
+ */
 config::config():config_section(), v_sections() {
   // noop soon
 };
 
-config::config(std::string filename):config_section(), v_sections() {
+/**
+ * Erstellt ein Konfigurationsobjekt zu einem Programm. Hierzu werden die 
+ * Dateien "/etc/prognamerc", "$(HOME)/.prognamerc" und ".prognamerc" eingelesen.
+ */
+config::config(std::string program):config_section(), v_sections() {
   // read config from file
-  if(! read_config(this, filename)) {
-    std::cerr << "An error occured between config processing" << std::endl;
-  }
+  std::string filename;
+
+  filename = "/etc/"+program+"rc";
+  open_file(filename);
+  
+  filename = std::getenv("HOME");
+
+  filename += "/."+program+"rc";
+  open_file(filename);
+
+  filename = "."+program+"rc";
+  open_file(filename);
+  
 };
 
+/**
+ * Liest eine Datei in das Konfigurationsobjekt ein.
+ */
+void config::open_file(std::string filename, bool report_error) {
+  if(! read_config(this, filename)) {
+    if(report_error) {
+      std::cerr << "An error occured between config processing ( file:" << filename << " )" << std::endl;
+
+    }
+
+  }
+
+};
+
+/**
+ * Fügt dem Konfigurationsobjekt eine Sektion hinzu.
+ */
 void config::add_section(config_section * sec) {
   if(sec != NULL) {
     v_sections.push_back(sec);
@@ -54,6 +88,9 @@ void config::add_section(config_section * sec) {
 
 };
 
+/**
+ * Liefert eine Sektion aus dem Konfigurationsobjekt.
+ */
 config_section& config::get_section(std::string name) {
   std::vector<config_section*>::iterator it;
 
@@ -63,7 +100,7 @@ config_section& config::get_section(std::string name) {
     }
   }
 
-  config_section empty("empty");
+  config_section* empty = new config_section("");
 
-  return empty;
+  return (*empty);
 };

@@ -39,8 +39,11 @@ arguments& maintools::get_arguments(int argc, char** argv) {
   return (*pargs);
 };
 
-config& maintools::get_config(std::string filename) {
-  config * pconf = new config(filename);
+/**
+ * Liefert ein Konfigurationsobjekt für ein Programm.
+ */
+config& maintools::get_config(std::string program) {
+  config * pconf = new config(program);
 
   return (*pconf);
 };

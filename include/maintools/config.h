@@ -45,7 +45,9 @@ class config:public config_section {
 public:
   config();
 
-  config(std::string filename);
+  config(std::string program);
+
+  void open_file(std::string filename, bool report_error = true);
 
   void add_section(config_section * sec);
 

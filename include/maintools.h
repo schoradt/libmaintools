@@ -45,7 +45,7 @@
 class maintools {
 public:
   static arguments& get_arguments(int argc, char** argv);
-  static config& get_config(std::string filename);
+  static config& get_config(std::string program);
 private:
 };
 

@@ -53,7 +53,9 @@ int main(int argc, char * argv[]) {
   }
 
   // create config
-  config conf(filename);
+  config conf(args.program());
+
+  conf.open_file(filename);
 
   if(conf.get_section("test1").name() == "test1") {
     std::cout << "    get_section OK" << std::endl;
