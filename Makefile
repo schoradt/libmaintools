@@ -38,6 +38,7 @@ TOUCH = touch
 ECHO = echo
 ECHON = echo -n
 INSTALL = install
+LINK = ln -s
 
 # Documentation Tool
 DOXYGEN = doxygen
@@ -193,11 +194,10 @@ tests:  $(TESTO) $(TESTS)
 # documentaion
 ############################
 
-doc: maintools.doxy
+doc: maintools.doxy FORCE
 	@echo -n "Generating documentaion ... "
 	@$(DOXYGEN) $<
 	@echo "DONE"
-
 
 ############################
 # compiling instructions
