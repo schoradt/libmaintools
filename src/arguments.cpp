@@ -52,6 +52,14 @@ arguments::arguments(int argc, char** argv)
    v_non_options(),
    s_progname(argv[0]) 
 {
+  // clean program name
+  int index = s_progname.find_last_of('/');
+
+  if(index != std::string::npos) {
+    s_progname = s_progname.substr(index+1);
+
+  }
+
   std::string arg_string;
   std::string look_ahead;
   // start at 1 to skip programm name
