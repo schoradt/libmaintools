@@ -73,7 +73,7 @@ int main(int argc, char ** argv) {
     }
     std::cout << "DONE" << std::endl;
 
-    std::cout << "testing getter ... ";
+    std::cout << "testing getter ... " << std::endl;
 
     int i;
     std::string str;
@@ -81,19 +81,19 @@ int main(int argc, char ** argv) {
     float f;
 
     if(args.get(test_name, i)) {
-      std::cout << "parameter " << test_name << " as int = " << i << " ";
+      std::cout << "    parameter " << test_name << " as int = " << i << std::endl;
     }
 
     if(args.get(test_name, str)) {
-      std::cout << "parameter " << test_name << " as string = " << str << " ";
+      std::cout << "    parameter " << test_name << " as string = " << str << std::endl;
     }
 
     if(args.get(test_name, b)) {
-      std::cout << "parameter " << test_name << " as bool = " << b << " ";
+      std::cout << "    parameter " << test_name << " as bool = " << b << std::endl;
     }
 
     if(args.get(test_name, f)) {
-      std::cout << "parameter " << test_name << " as float = " << f << " ";
+      std::cout << "    parameter " << test_name << " as float = " << f << std::endl;
     }
 
     std::cout << "DONE" << std::endl;
@@ -102,29 +102,31 @@ int main(int argc, char ** argv) {
 
   std::cout << "testing non option part 1 ... ";
 
-  std::cout << "number of non options found " << args.count_noptions() << " ";
+  std::cout << "number of non options found " << args.count_noptions() << std::endl;
 
   for(int i = 0; i < args.count_noptions(); i++) {
     std::string no_str;
 
     if(args.get_noption(i, no_str)) {
-      std::cout << "non option " << i << ": " << no_str << " ";
+      std::cout << "    non option (string)" << i << ": " << no_str << " ";
 
     }
 
     int no_int;
 
     if(args.get_noption(i, no_int)) {
-      std::cout << "non option " << i << ": " << no_int << " ";
+      std::cout << "non option (int)" << i << ": " << no_int << " ";
 
     }
 
     float no_float;
 
     if(args.get_noption(i, no_float)) {
-      std::cout << "non option " << i << ": " << no_float << " ";
+      std::cout << "non option (float)" << i << ": " << no_float << " ";
 
     }
+
+    std::cout << std::endl;
 
   };
 
@@ -132,14 +134,14 @@ int main(int argc, char ** argv) {
 
   std::cout << "testing non option part 2 ... ";
 
-  std::cout << "number of non options found " << args.count_noptions() << " ";
+  std::cout << "number of non options found " << args.count_noptions() << std::endl;
 
   arguments::non_option_iterator it;
 
   for(it = args.no_begin(); it != args.no_end(); it++) {
     std::string no_str = *it;
 
-    std::cout << "non option : " << no_str << " ";
+    std::cout << "    non option : " << no_str << " " << std::endl;
 
   };
 

@@ -36,7 +36,7 @@ int main(int argc, char * argv[]) {
 
   std::cout << "test 2 - config class whith file ..." << std::endl;
 
-  arguments args(argc, argv);
+  arguments args = maintools::get_arguments(argc, argv);
 
   std::string filename;
 
@@ -53,7 +53,7 @@ int main(int argc, char * argv[]) {
   }
 
   // create config
-  config conf(args.program());
+  config conf = maintools::get_config(args.program());
 
   conf.open_file(filename);
 
@@ -82,7 +82,18 @@ int main(int argc, char * argv[]) {
     std::cout << "    get 2 FAIL" << std::endl;
 
   }
-  
+
+  arguments args_2 = maintools::get_arguments();
+
+  config conf_2 = maintools::get_config(args_2.program());
+
+  if(conf_2.get_section("test1").name() == "test1") {
+    std::cout << "    singleton OK" << std::endl;
+
+  } else {
+    std::cout << "    singleton FAIL" << std::endl;
+
+  }  
  
   return 0;
 

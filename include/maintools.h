@@ -26,6 +26,8 @@
 #include "maintools/arguments.h"
 #include "maintools/config.h"
 
+#include <map>
+
 /**
  * @file
  *
@@ -44,10 +46,17 @@
 
 class maintools {
 public:
-  static arguments& get_arguments(int argc, char** argv);
+  static arguments& get_arguments(int argc = 0, char** argv = 0);
   static config& get_config(std::string program);
 private:
+  /**
+   * Zeiger auf den erzeugten Argumenthandler
+   */
+  static arguments *pargs;
+  /**
+   * Map der erzeugten Konfigurationen nach Programmname.
+   */
+  static std::map<std::string,config*> configs;
 };
-
 
 #endif

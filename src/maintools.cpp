@@ -30,11 +30,17 @@
  * @author Sven Schoradt
  */
 
+arguments *maintools::pargs = 0;
+std::map<std::string,config*> maintools::configs;
+
 /**
  * Liefert einen Argumenthandler für das Programm.
  */
 arguments& maintools::get_arguments(int argc, char** argv) {
-  arguments* pargs = new arguments(argc, argv);
+  if(pargs == 0) {
+    pargs = new arguments(argc, argv);
+
+  }
 
   return (*pargs);
 };
@@ -43,8 +49,12 @@ arguments& maintools::get_arguments(int argc, char** argv) {
  * Liefert ein Konfigurationsobjekt für ein Programm.
  */
 config& maintools::get_config(std::string program) {
-  config * pconf = new config(program);
+  if(configs.find(program) == configs.end()) {
+    config * pconf = new config(program);
+    configs[program] = pconf;
 
-  return (*pconf);
+  }
+
+  return (*(configs[program]));
 };
 
