@@ -21,28 +21,39 @@
 .PHONY: tests clean clean_all clean_dep all lib FORCE
 
 # set global definitions
+
+# Compiling tools
 CC = gcc
 CPP = g++
 LINKER = g++
 LEX = flex
-LEX_FLAGS = -l
 YACC = bison
-YACC_FLAGS = -d -v
-CPP_FLAGS = -Wall -w -g -ggdb
-LIBLINKER_FLAGS = -shared
-LINKER_FLAGS = 
-CPP_INCLUDES = -I.
-CPP_DEFINES =
+
+# System tools
 TAR = tar
-
-DOXYGEN = doxygen
-
-LIBRARYS = -L. -lmaintools
-
 RM = rm -f
 MKDIR = mkdir -p
 MV = mv -f
 TOUCH = touch
+ECHO = echo
+ECHON = echo -n
+INSTALL = install
+
+# Documentation Tool
+DOXYGEN = doxygen
+
+# Flags for various tools
+LEX_FLAGS = -l
+YACC_FLAGS = -d -v
+CPP_FLAGS = -Wall -w
+LIBCPP_FLAGS = -fPIC
+LIBLINKER_FLAGS = -shared
+LINKER_FLAGS = 
+CPP_INCLUDES = -I.
+CPP_DEFINES =
+
+
+LIBRARYS = -L. -lmaintools
 
 # set object path
 POBJ = .obj
@@ -66,8 +77,8 @@ IDIRS = $(foreach DIR, $(SUBDIRS), -I$(DIR))
 CPP_INCLUDES    += $(IDIRS)
 
 # set more flags for compiler and linker
-CPP_FLAGS 	+= -g
-LINKER_FLAGS 	+= -g
+CPP_FLAGS 	+= -g -ggdb
+LINKER_FLAGS 	+= -g -ggdb
 CPP_INCLUDE     += 
 
 # set the needed objects
@@ -107,6 +118,21 @@ $(LIBLINKERNAME): $(LIBSONAME)
 
 $(LIBSONAME): $(LIBOBJECTS)
 	$(LINKER) $(LINKER_FLAGS) $(LIBLINKER_FLAGS) -o $@ $(OBJECTS:%=$(POBJ)/%)
+
+############################
+# library building
+############################
+install: lib
+	@$(ECHON) "Installing lib ..."
+	$(MKDIR) $(DESTDIR)/usr/lib
+	$(INSTALL) $(LIBSONAME) $(DESTDIR)/usr/lib
+	@$(ECHO) "DONE"
+	@$(ECHON) "Installing header ..."
+	$(MKDIR) $(DESTDIR)/usr/include
+	$(MKDIR) $(DESTDIR)/usr/include/maintools
+	$(INSTALL) include/maintools.h $(DESTDIR)/usr/include
+	$(INSTALL) include/maintools/*.h $(DESTDIR)/usr/include/maintools
+	@$(ECHO) "DONE"
 
 
 
@@ -181,7 +207,7 @@ $(POBJ)/%.o: 	%.cpp
 	$(CPP) $(CPP_FLAGS) $(CPP_INCLUDES) -c -o $@ $<
 
 %.o: 	%.cpp
-	$(CPP) $(CPP_FLAGS) $(CPP_INCLUDES) -c -o $@ $<
+	$(CPP) $(CPP_FLAGS) $(LIBCPP_FLAGS) $(CPP_INCLUDES) -c -o $@ $<
 
 $(POBJ)/%.yy.cpp:   %.l
 	$(LEX) $(LEX_FLAGS) -o$@ $<

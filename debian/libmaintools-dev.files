@@ -1,0 +1,6 @@
+usr/include/maintools.h
+usr/include/maintools/utility.h
+usr/include/maintools/error_handler.h
+usr/include/maintools/config_section.h
+usr/include/maintools/config.h
+usr/include/maintools/arguments.h

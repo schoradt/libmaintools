@@ -1,0 +1,24 @@
+Source: libmaintools
+Priority: optional
+Section: libs
+Build-Depends: debhelper (>= 3)
+Maintainer: Sven Schoradt <sven@dex.de>
+Standards-Version: 3.5.8
+
+Package: libmaintools
+Architecture: any
+Section: libs
+Depends: ${shlibs:Depends}
+Description: Classes for application development.
+ Libmaintools provides c++ classes for command line arguments parsing and 
+ configuration file handling.
+
+Package: libmaintools-dev
+Architecture: any
+Section: libdevel
+Depends: libmaintools (=${Source-Version})
+Description: Classes for application development.
+ Libmaintools provides c++ classes for command line arguments parsing and 
+ configuration file handling.
+ .
+ Development header, documentation and example stuff.
