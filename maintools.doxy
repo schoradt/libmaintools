@@ -5,7 +5,7 @@
 #---------------------------------------------------------------------------
 PROJECT_NAME           = libmaintools
 PROJECT_NUMBER         = 0.2
-OUTPUT_DIRECTORY       = /home/schoradt/data/lang/cpp/libmaintools/libmaintools-current/doc/code/
+OUTPUT_DIRECTORY       = ./doc/code/
 OUTPUT_LANGUAGE        = German
 USE_WINDOWS_ENCODING   = NO
 BRIEF_MEMBER_DESC      = YES
@@ -62,8 +62,8 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = /home/schoradt/data/lang/cpp/libmaintools/libmaintools-current/include/ \
-                         /home/schoradt/data/lang/cpp/libmaintools/libmaintools-current/src/
+INPUT                  = ./include/ \
+                         ./src/
 FILE_PATTERNS          = *.cpp \
                          *.h \
                          *.l \
