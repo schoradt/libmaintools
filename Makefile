@@ -95,9 +95,6 @@ LIBLINKERNAME = lib$(LIBNAME).so
 
 LIBLINKER_FLAGS += -Wl,-soname,$(LIBLINKERNAME)
 
-# File for dependencies
-DEPFILE = Makefile.depend
-
 LIBOBJECTS = $(PREPARE_STAMP) $(OBJECTS:%=$(POBJ)/%)
 
 #####################################################################
@@ -135,8 +132,6 @@ install: lib
 	$(INSTALL) include/maintools/*.h $(DESTDIR)/usr/include/maintools
 	@$(ECHO) "DONE"
 
-
-
 ############################
 # cleaning
 ############################
@@ -168,7 +163,6 @@ distclean:	cleanall clean_doc
 #
 
 clean_dep: 
-	@$(RM) $(DEPFILE)
 	@find . -name '*.d' -exec $(RM) '{}' ';'
 
 clean_doc:
@@ -228,10 +222,10 @@ $(PREPARE_STAMP):
 # all %.cpp files
 ############################
 
-$(DEPFILE):	depend
+Makefile.depend:	depend
 
 depend:	$(PREPARE_STAMP) $(patsubst %.o, $(POBJ)/%.d, $(OBJECTS)) $(TESTSRC:test/%.cpp=$(POBJ)/%.d)
-	@find . -name '*.d' -exec cat '{}' > $(DEPFILE) ';'
+	@find . -name '*.d' -exec cat '{}' > Makefile.depend ';'
 
 $(POBJ)/%.d:	%.cpp
 	echo -n "$(POBJ)/" > $@; $(CPP) $(CPP_INCLUDES) $(CPP_FLAGS) -MM $< >> $@
@@ -245,7 +239,7 @@ FORCE:
 .obj/config_scanner.yy.d: .obj/config_scanner.yy.cpp
 	echo -n "$(POBJ)/" > $@; $(CPP) $(CPP_INCLUDES) $(CPP_FLAGS) -MM $< >> $@
 
-include $(DEPFILE)
+include Makefile.depend
 
 
 
