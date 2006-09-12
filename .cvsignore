@@ -1,1 +1,7 @@
-.prepare_stamp Makefile.depend libmaintools.so.1 test_*.t libmaintools.so
+.prepare_stamp
+Makefile.depend 
+libmaintools.so.1 
+test_*.t 
+libmaintools.so
+.cdtproject
+.project
