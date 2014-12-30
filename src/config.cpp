@@ -21,6 +21,7 @@
  */
 
 #include <iostream>
+#include <cstdlib>
 
 #include "maintools/config.h"
 

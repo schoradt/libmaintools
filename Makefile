@@ -182,7 +182,7 @@ TESTS = $(TESTSRC:test/%.cpp=%.t)
 tests:  $(TESTO) $(TESTS)
 
 %.t:	$(POBJ)/%.o
-	$(LINKER) $(LINKER_FLAGS) $(LIBRARYS) -o $@ $(POBJ)/$*.o
+	$(LINKER) $(LINKER_FLAGS) -o $@ $(POBJ)/$*.o $(LIBRARYS)
 
 ############################
 # documentaion
