@@ -1,6 +1,6 @@
-#!/bin/tcsh
+#!/bin/sh
 
-setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:.
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:.
 
 # test 1
 ./test_1.t --test=testparam --testparam=12.23 -r tester --te p1 p2 p3 -- --p4 12 12.23

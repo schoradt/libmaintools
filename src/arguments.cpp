@@ -60,8 +60,8 @@ arguments::arguments(int argc, char** argv)
 
   }
 
-  std::string arg_string;
   std::string look_ahead;
+
   // start at 1 to skip programm name
   for(int i = 1; i < argc; i++) {
     // init strings for current argument section

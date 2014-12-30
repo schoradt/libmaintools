@@ -95,7 +95,7 @@ void config::add_section(config_section * sec) {
 config_section& config::get_section(std::string name) {
   std::vector<config_section*>::iterator it;
 
-  for(it=v_sections.begin(); it != v_sections.end(); it++) {
+  for(it=v_sections.begin(); it != v_sections.end(); ++it) {
     if((*it)->name() == name) {
       return (*(*it));
     }
