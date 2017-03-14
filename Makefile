@@ -198,7 +198,7 @@ doc: maintools.doxy FORCE
 ############################
 
 $(POBJ)/%.o: 	%.cpp
-	$(CPP) $(CPP_FLAGS) $(CPP_INCLUDES) -c -o $@ $<
+	$(CPP) $(CPP_FLAGS) $(LIBCPP_FLAGS) $(CPP_INCLUDES) -c -o $@ $<
 
 %.o: 	%.cpp
 	$(CPP) $(CPP_FLAGS) $(LIBCPP_FLAGS) $(CPP_INCLUDES) -c -o $@ $<
